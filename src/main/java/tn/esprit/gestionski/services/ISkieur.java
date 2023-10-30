@@ -11,4 +11,4 @@ public interface ISkieur {
     public List<Skieur> findAll();
     public Skieur findById(long idS);
     public void delete(long idS);
-    public Inscription addInscriptionAndAssignToSkieur(Inscription inscription, Long numSkieur) ;}
+    Skieur assignSkierToPiste(Long numSkieur, Long numPiste);}

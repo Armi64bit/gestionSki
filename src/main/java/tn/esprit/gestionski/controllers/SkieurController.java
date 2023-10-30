@@ -1,5 +1,6 @@
 package tn.esprit.gestionski.controllers;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.gestionski.entities.Inscription;
@@ -34,8 +35,12 @@ public class SkieurController  {
     public void deleteFoyer(@PathVariable long idF) {
         sk.delete(idF);
     }
-    @PostMapping("/{numSkieur}/inscriptions")
+    /*@PostMapping("/{numSkieur}/inscriptions")
     public Inscription addInscriptionAndAssignToSkieur(@PathVariable Long numSkieur, @RequestBody Inscription inscription) {
         return sk.addInscriptionAndAssignToSkieur(inscription, numSkieur);
+    }*/
+    @PostMapping("/{numSkieur}/{numPiste}")
+    public Skieur assignSkierToPiste(@PathVariable Long numSkieur, @PathVariable Long numPiste ) {
+        return sk.assignSkierToPiste(numSkieur, numPiste);
     }
 }
