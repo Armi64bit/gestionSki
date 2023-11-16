@@ -3,17 +3,22 @@ package tn.esprit.gestionski.services;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tn.esprit.gestionski.entities.Cours;
 import tn.esprit.gestionski.entities.Inscription;
 import tn.esprit.gestionski.entities.Skieur;
+import tn.esprit.gestionski.repositories.CoursRepository;
 import tn.esprit.gestionski.repositories.InscriptionRepository;
 import tn.esprit.gestionski.repositories.SkieurRepository;
 
 import java.util.List;
+import java.util.Set;
+
 @Service
 @AllArgsConstructor
 public class InscriptionServiceImp implements  IInscription{
   private InscriptionRepository  inscriptionRepository;
     private   SkieurRepository  skieurRepository;
+    private CoursRepository cr;
 
     @Override
     public Inscription addInscriptionAndAssignToSkieur(Inscription inscription, Long numSkieur) {
@@ -49,4 +54,6 @@ public class InscriptionServiceImp implements  IInscription{
          inscriptionRepository.deleteById(idS);
 
     }
+
+
 }

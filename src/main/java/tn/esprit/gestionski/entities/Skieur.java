@@ -24,9 +24,10 @@ public class Skieur {
     private String ville;
     @OneToOne
     private Abonnement abonnement;
-    @ManyToMany (mappedBy = "skieurs")
+    @ManyToMany
     private Set<Piste> pistes;
-    @OneToMany(mappedBy = "skieur")//one to many mapped by fili 3Ndou cardinalié a9al
+    @OneToMany(mappedBy = "skieur",cascade = CascadeType.ALL)//one to many mapped by fili 3Ndou cardinalié a9al
+
     private Set<Inscription> inscripions;
 
 }

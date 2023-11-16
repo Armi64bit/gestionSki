@@ -1,6 +1,7 @@
 package tn.esprit.gestionski.services;
 
 import tn.esprit.gestionski.entities.Inscription;
+import tn.esprit.gestionski.entities.Skieur;
 
 import java.util.List;
 

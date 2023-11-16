@@ -39,8 +39,12 @@ public class SkieurController  {
     public Inscription addInscriptionAndAssignToSkieur(@PathVariable Long numSkieur, @RequestBody Inscription inscription) {
         return sk.addInscriptionAndAssignToSkieur(inscription, numSkieur);
     }*/
-    @PostMapping("/{numSkieur}/{numPiste}")
+    @PostMapping("/aspt/{numSkieur}/{numPiste}")
     public Skieur assignSkierToPiste(@PathVariable Long numSkieur, @PathVariable Long numPiste ) {
         return sk.assignSkierToPiste(numSkieur, numPiste);
+    }
+    @PostMapping("/asc/{numc}")
+    public Skieur asc(Skieur Sk,Long numc ) {
+        return sk.assignKieurToCours(Sk,numc) ;
     }
 }
