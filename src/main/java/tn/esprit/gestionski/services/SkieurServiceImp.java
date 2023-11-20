@@ -1,7 +1,9 @@
 package tn.esprit.gestionski.services;
 
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import tn.esprit.gestionski.entities.*;
 import tn.esprit.gestionski.repositories.CoursRepository;
@@ -11,7 +13,7 @@ import tn.esprit.gestionski.repositories.SkieurRepository;
 
 import java.util.List;
 import java.util.Set;
-
+@Slf4j
 @Service
 @AllArgsConstructor
 public class SkieurServiceImp implements ISkieur {
@@ -74,5 +76,13 @@ public class SkieurServiceImp implements ISkieur {
     @Override
     public List<Skieur> retriveSkByTa(TypeAbonnement t) {
         return sk.findSkieurByAbonnement_TypeAbonnement(t);
+    }
+@Scheduled(fixedRate = 3000)
+    public void fixedrate(){
+log.info("lee ");
+}
+    @Scheduled(cron = "0 33 16 * * * ")
+    public void cronfix(){
+        log.info("crong ");
     }
 }

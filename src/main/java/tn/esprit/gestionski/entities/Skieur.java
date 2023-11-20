@@ -3,6 +3,7 @@ package tn.esprit.gestionski.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Set;
 
@@ -19,8 +20,7 @@ public class Skieur {
     private long numSkieur;
     private String nomS;
     private String prenomS;
-    @Temporal(TemporalType.DATE)
-    private Date dateNaissance;
+    private LocalDate dateNaissance;
     private String ville;
     @OneToOne
     private Abonnement abonnement;

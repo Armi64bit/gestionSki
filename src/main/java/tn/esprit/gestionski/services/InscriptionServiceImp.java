@@ -3,13 +3,15 @@ package tn.esprit.gestionski.services;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.gestionski.entities.Cours;
-import tn.esprit.gestionski.entities.Inscription;
-import tn.esprit.gestionski.entities.Skieur;
+import tn.esprit.gestionski.entities.*;
 import tn.esprit.gestionski.repositories.CoursRepository;
 import tn.esprit.gestionski.repositories.InscriptionRepository;
 import tn.esprit.gestionski.repositories.SkieurRepository;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -18,7 +20,7 @@ import java.util.Set;
 public class InscriptionServiceImp implements  IInscription{
   private InscriptionRepository  inscriptionRepository;
     private   SkieurRepository  skieurRepository;
-    private CoursRepository cr;
+    private CoursRepository ic;
 
     @Override
     public Inscription addInscriptionAndAssignToSkieur(Inscription inscription, Long numSkieur) {
@@ -55,5 +57,35 @@ public class InscriptionServiceImp implements  IInscription{
 
     }
 
+    @Override
+    public List<Integer> numWeeksCourseOfInstructorBySupport(Long numMoniteur, Support support) {
+        return inscriptionRepository.numWeeksCourseOfInstructorBySupport(numMoniteur,support);
+    }
 
+    //ti5dimch
+public Inscription addInscpriptionAndAssingToCoursAndSkieur(Inscription inscription, long numSkieur, long NumCours) {
+    Cours cour = ic.findById(NumCours).orElse(null);
+    Skieur skieur = skieurRepository.getById(numSkieur);
+
+    if (cour.getTypeCours().equals(TypeCours.COLLECTIF_ENFANT) && cour.getInscripion().size() >= 6) {
+        throw new IllegalArgumentException(" plus que 6 inscriptions pour cours.");
+    } else if (cour.getTypeCours().equals(TypeCours.COLLECTIF_ADULTE) && cour.getInscripion().size() >= 6) {
+        throw new IllegalArgumentException(" que 6 inscriptions pour ce cours.");
+    }
+    LocalDate currentDate = LocalDate.now();
+    LocalDate birthDate = skieur.getDateNaissance();
+    int age = Period.between(birthDate, currentDate).getYears();
+
+    if (cour.getTypeCours().equals(TypeCours.COLLECTIF_ADULTE) && age < 18) {
+        throw new IllegalArgumentException("Le skieur doit avoir au moins 18 ans pour s'inscrire à ce cours adulte.");
+    }
+    inscription.setCours(cour);
+    inscription.setSkieur(skieur);
+
+    return inscriptionRepository.save(inscription);
 }
+}
+
+
+
+
