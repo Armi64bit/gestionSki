@@ -3,10 +3,7 @@ package tn.esprit.gestionski.services;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tn.esprit.gestionski.entities.Cours;
-import tn.esprit.gestionski.entities.Inscription;
-import tn.esprit.gestionski.entities.Piste;
-import tn.esprit.gestionski.entities.Skieur;
+import tn.esprit.gestionski.entities.*;
 import tn.esprit.gestionski.repositories.CoursRepository;
 import tn.esprit.gestionski.repositories.InscriptionRepository;
 import tn.esprit.gestionski.repositories.PisteRepository;
@@ -63,14 +60,19 @@ public class SkieurServiceImp implements ISkieur {
     @Override
 
     public Skieur assignKieurToCours(Skieur Sk,Long NumC){
-        Skieur savedSk=sk.save(Sk);
-        Cours c= cr.findById(NumC).orElse(null);
-        Set<Inscription> ins=savedSk.getInscripions();
-        for(Inscription i :ins){
-            i.setCours(c);
-            i.setSkieur(savedSk);
+        Skieur skieur1 = sk.save(Sk);
+        Cours cours = cr.findById(NumC).orElse(null);
+        Set<Inscription> inscriptionList = skieur1.getInscripions();
+        for (Inscription i:inscriptionList){
+            i.setSkieur(skieur1);
+            i.setCours(cours);
             inscriptionRepository.save(i);
         }
-        return savedSk;
+        return skieur1;
+    }
+
+    @Override
+    public List<Skieur> retriveSkByTa(TypeAbonnement t) {
+        return sk.findSkieurByAbonnement_TypeAbonnement(t);
     }
 }

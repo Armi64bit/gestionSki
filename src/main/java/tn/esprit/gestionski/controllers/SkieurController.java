@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.gestionski.entities.Inscription;
 import tn.esprit.gestionski.entities.Skieur;
+import tn.esprit.gestionski.entities.TypeAbonnement;
 import tn.esprit.gestionski.services.SkieurServiceImp;
 
 import java.util.List;
@@ -46,5 +47,9 @@ public class SkieurController  {
     @PostMapping("/asc/{numc}")
     public Skieur asc(Skieur Sk,Long numc ) {
         return sk.assignKieurToCours(Sk,numc) ;
+    }
+    @GetMapping("/findbytypebo/{t}")
+    public List<Skieur> findbytypebo(@PathVariable TypeAbonnement t) {
+        return  sk.retriveSkByTa(t);
     }
 }
