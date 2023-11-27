@@ -12,7 +12,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@EqualsAndHashCode
+//@EqualsAndHashCode
 public class Abonnement implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,7 +24,8 @@ public class Abonnement implements Serializable {
     private float prixAbon;
     @Enumerated (EnumType.STRING)
     private TypeAbonnement typeAbonnement;
-
+    @OneToOne(mappedBy = "abonnement")
+    private Skieur skieur;
 
 
 }

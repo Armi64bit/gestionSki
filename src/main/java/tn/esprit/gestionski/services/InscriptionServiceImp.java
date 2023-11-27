@@ -63,20 +63,21 @@ public class InscriptionServiceImp implements  IInscription{
     }
 
     //ti5dimch
-public Inscription addInscpriptionAndAssingToCoursAndSkieur(Inscription inscription, long numSkieur, long NumCours) {
+    @Override
+    public Inscription addInscpriptionAndAssingToCoursAndSkieur(Inscription inscription, long numSkieur, long NumCours) {
     Cours cour = ic.findById(NumCours).orElse(null);
     Skieur skieur = skieurRepository.getById(numSkieur);
 
-    if (cour.getTypeCours().equals(TypeCours.COLLECTIF_ENFANT) && cour.getInscripion().size() >= 6) {
+    if (cour.getTypeCours() ==(TypeCours.COLLECTIF_ENFANT) && cour.getInscripion().size() >= 6) {
         throw new IllegalArgumentException(" plus que 6 inscriptions pour cours.");
-    } else if (cour.getTypeCours().equals(TypeCours.COLLECTIF_ADULTE) && cour.getInscripion().size() >= 6) {
+    } else if (cour.getTypeCours()==(TypeCours.COLLECTIF_ADULTE) && cour.getInscripion().size() >= 6) {
         throw new IllegalArgumentException(" que 6 inscriptions pour ce cours.");
     }
     LocalDate currentDate = LocalDate.now();
     LocalDate birthDate = skieur.getDateNaissance();
     int age = Period.between(birthDate, currentDate).getYears();
 
-    if (cour.getTypeCours().equals(TypeCours.COLLECTIF_ADULTE) && age < 18) {
+    if (cour.getTypeCours() ==(TypeCours.COLLECTIF_ADULTE) && age <= 18) {
         throw new IllegalArgumentException("Le skieur doit avoir au moins 18 ans pour s'inscrire à ce cours adulte.");
     }
     inscription.setCours(cour);
@@ -84,6 +85,7 @@ public Inscription addInscpriptionAndAssingToCoursAndSkieur(Inscription inscript
 
     return inscriptionRepository.save(inscription);
 }
+
 }
 
 

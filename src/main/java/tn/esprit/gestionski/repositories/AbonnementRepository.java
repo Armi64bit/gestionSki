@@ -15,4 +15,7 @@ public interface AbonnementRepository extends JpaRepository<Abonnement,Long> {
     @Query("select a from Abonnement a where a.typeAbonnement=:type order by a.dateDebut")
     Set<Abonnement> getSubscriptionByType(@Param("type") TypeAbonnement type);
     Set<Abonnement> findAbonnementByDateDebutBetween(Date startDate, Date endDate);
+    @Query("SELECT a FROM Abonnement a WHERE a.dateDebut <= CURRENT_DATE AND a.dateFin >= CURRENT_DATE")
+    List<Abonnement> findActiveSubscriptions();
+
 }

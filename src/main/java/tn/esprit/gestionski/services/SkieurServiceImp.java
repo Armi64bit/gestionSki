@@ -77,11 +77,11 @@ public class SkieurServiceImp implements ISkieur {
     public List<Skieur> retriveSkByTa(TypeAbonnement t) {
         return sk.findSkieurByAbonnement_TypeAbonnement(t);
     }
-@Scheduled(fixedRate = 3000)
+//@Scheduled(fixedRate = 3000)
     public void fixedrate(){
 log.info("lee ");
 }
-    @Scheduled(cron = "0 33 16 * * * ")
+  //  @Scheduled(cron = "0 33 16 * * * ")
     public void cronfix(){
         log.info("crong ");
     }

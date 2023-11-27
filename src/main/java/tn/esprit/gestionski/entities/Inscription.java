@@ -1,5 +1,6 @@
 package tn.esprit.gestionski.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,8 +18,10 @@ public class Inscription implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long numInscription;
     private int numSeamiane;
+    @JsonIgnore
     @ManyToOne
     private Skieur skieur;
+    @JsonIgnore
     @ManyToOne
     private Cours cours;
 

@@ -11,4 +11,6 @@ import java.util.Set;
 public interface IAbo {
     Set<Abonnement> getSubscriptionByType(TypeAbonnement type);
     Set<Abonnement> retrieveSubscriptionsByDates(Date date1, Date endDate);
-}
+    public void retrieveSubscriptions() ;
+
+    }

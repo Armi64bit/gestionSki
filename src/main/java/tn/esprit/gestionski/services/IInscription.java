@@ -15,4 +15,6 @@ public interface IInscription {
     public Inscription findById(long idS);
     public void delete(long idS);
     List<Integer> numWeeksCourseOfInstructorBySupport(Long numMoniteur, Support support);
-}
+    public Inscription addInscpriptionAndAssingToCoursAndSkieur(Inscription inscription, long numSkieur, long NumCours) ;
+
+    }
